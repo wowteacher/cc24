@@ -5,13 +5,13 @@
 //punto di partenza per spiegare come funziona perlin noise in 2d
 
 var inc = 0.1; // aumentando ci sono più variazioni di colore || default 0.01
-var scl = 10; // un vector ogni 10 pixel
+var scl = 50; // un vector ogni 10 pixel
 var cols, rows;
 
 var fr; //framerate
 
 function setup() {
-	createCanvas(200, 200);
+	createCanvas(500, 550);
 	//pixelDensity(1); // annulla la visualizzazione hd del retina display
 	cols = floor (width/scl);
 	rows = floor (height / scl);
@@ -19,6 +19,8 @@ function setup() {
 }
 
 function draw() {
+	background(200, 100, 150, 10);
+	//randomSeed(10);
 var yoff = 0;
 
   for (var y = 0; y < rows; y++) { //righe dell'array di pixel
@@ -28,9 +30,10 @@ var yoff = 0;
       var r = noise(xoff, yoff) * 255; // aggiungo il noise per l'interpolazione
   	  
   	  //invece di riempire la griglia, voglio delle linee vector
-  	  var v = p5.Vector.fromAngle(PI); // 0 linee orizzontali PI/2 verticali
+  	  var v = p5.Vector.fromAngle(random(-PI)); // 0 linee orizzontali PI/2 verticali
   	  xoff += inc;
-	   	stroke(0);
+  	  strokeWeight(random(3));
+	   	stroke(0, 100);
 	   	push();
 	   	
 	   	translate(x * scl, y * scl);
