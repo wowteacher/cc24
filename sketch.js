@@ -26,11 +26,22 @@ var yoff = 0;
     for (var x = 0; x < cols; x++) { //colonne dell'array di pixel
       var index = (x + y * width) * 4; // visualizzazione di ogni punto in base alla larghezza
       var r = noise(xoff, yoff) * 255; // aggiungo il noise per l'interpolazione
-   
-      xoff += inc;
+  	  
+  	  //invece di riempire la griglia, voglio delle linee vector
+  	  var v = p5.Vector.fromAngle(PI); // 0 linee orizzontali PI/2 verticali
+  	  xoff += inc;
+	   	stroke(0);
+	   	push();
+	   	
+	   	translate(x * scl, y * scl);
+	   	rotate(v.heading());
+	   	line(0,0, scl, 0);
+	   	
+	   	pop();
+	   	
 	   	//fill(random(255));
-	   	fill(r);
-   	rect(x * scl, y * scl, scl,scl); // griglia di pixel
+	   	//fill(r);
+   		//rect(x * scl, y * scl, scl,scl); // griglia di pixel
     }
     yoff += inc;
   }
