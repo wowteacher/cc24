@@ -13,12 +13,17 @@ var zoff = 0;
 
 var fr; //framerate
 
+var particles = []; //array
+
 function setup() {
 	createCanvas(500, 550);
 	//pixelDensity(1); // annulla la visualizzazione hd del retina display
 	cols = floor(width / scl);
 	rows = floor(height / scl);
 	fr = createP(''); //crea il paragrafo per visualizzare il frameRate corrente
+
+	//implemento array di particles
+	particles[0] = new Particle();
 }
 
 function draw() {
@@ -32,17 +37,17 @@ function draw() {
 		for (var x = 0; x < cols; x++) { //colonne dell'array di pixel
 			var index = (x + y * width) * 4; // visualizzazione di ogni punto in base alla larghezza
 			//var r = noise(xoff, yoff) * 255; // aggiungo il noise per l'interpolazione (255 variazioni di grigio)
-			
+
 			// invece delle variazioni di grigio voglio visualizzare le variazione degli angoli
-			var angle = noise (xoff, yoff, zoff)* TWO_PI; 
+			var angle = noise(xoff, yoff, zoff) * TWO_PI;
 			var v = p5.Vector.fromAngle(angle);
-			
+
 			//invece di riempire la griglia, voglio delle linee vector
 			//var v = p5.Vector.fromAngle(random(TWO_PI)); // 0 linee orizzontali PI/2 verticali
 			xoff += inc;
 			//strokeWeight(random(2.0));
 			//stroke(0, 100);
-			
+
 			stroke(0)
 			push();
 
@@ -57,8 +62,14 @@ function draw() {
 			//rect(x * scl, y * scl, scl,scl); // griglia di pixel
 		}
 		yoff += inc;
-		
+
 		zoff += 0.0002; // incremento 3d del noise
+
 	}
+
+		particles[0].update();
+		particles[0].show();
+
+	
 	fr.html(floor(frameRate())); // arrotonda e visualizza il P che contiene il frameRate
 }
