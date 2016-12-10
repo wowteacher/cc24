@@ -5,8 +5,11 @@
 //punto di partenza per spiegare come funziona perlin noise in 2d
 
 var inc = 0.1; // aumentando ci sono più variazioni di colore || default 0.01
-var scl = 10; // un vector ogni 10 pixel
+var scl = 25; // un vector ogni n pixel
 var cols, rows;
+
+//terza dimensione in questo caso è il tempo e agisce sull'angolo
+var zoff = 0;
 
 var fr; //framerate
 
@@ -19,8 +22,9 @@ function setup() {
 }
 
 function draw() {
-	background(200, 100, 150, 10);
-	randomSeed(10); //seed value restituisce numeri pseudo casuali a ogni loop
+	//background(200, 100, 150, 10);
+	background(255);
+	//randomSeed(10); //seed value restituisce numeri pseudo casuali a ogni loop
 	var yoff = 0;
 
 	for (var y = 0; y < rows; y++) { //righe dell'array di pixel
@@ -30,14 +34,16 @@ function draw() {
 			//var r = noise(xoff, yoff) * 255; // aggiungo il noise per l'interpolazione (255 variazioni di grigio)
 			
 			// invece delle variazioni di grigio voglio visualizzare le variazione degli angoli
-			var angle = noise (xoff, yoff)* TWO_PI; 
+			var angle = noise (xoff, yoff, zoff)* TWO_PI; 
 			var v = p5.Vector.fromAngle(angle);
 			
 			//invece di riempire la griglia, voglio delle linee vector
 			//var v = p5.Vector.fromAngle(random(TWO_PI)); // 0 linee orizzontali PI/2 verticali
 			xoff += inc;
-			strokeWeight(random(3));
-			stroke(0, 100);
+			//strokeWeight(random(2.0));
+			//stroke(0, 100);
+			
+			stroke(0)
 			push();
 
 			translate(x * scl, y * scl);
@@ -51,6 +57,8 @@ function draw() {
 			//rect(x * scl, y * scl, scl,scl); // griglia di pixel
 		}
 		yoff += inc;
+		
+		zoff += 0.0002; // incremento 3d del noise
 	}
 	fr.html(floor(frameRate())); // arrotonda e visualizza il P che contiene il frameRate
 }
