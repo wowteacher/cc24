@@ -16,7 +16,7 @@ var fr; //framerate
 var particles = []; //array
 
 function setup() {
-	createCanvas(500, 550);
+	createCanvas(700, 500);
 	//pixelDensity(1); // annulla la visualizzazione hd del retina display
 	cols = floor(width / scl);
 	rows = floor(height / scl);
@@ -32,7 +32,9 @@ function setup() {
 
 function draw() {
 	//background(200, 100, 150, 10);
-	background(255);
+	//background(255);
+	//background (91, 207, 149, 20)
+	background (255, 214, 127, 35);
 	//randomSeed(10); //seed value restituisce numeri pseudo casuali a ogni loop
 	var yoff = 0;
 
@@ -57,7 +59,7 @@ function draw() {
 
 			translate(x * scl, y * scl);
 			rotate(v.heading());
-			line(0, 0, scl, 0);
+			//line(0, 0, scl, 0);
 
 			pop();
 
@@ -73,6 +75,7 @@ function draw() {
 	for (var i = 0; i < particles.length; i++) {
 		particles[i].update();
 		particles[i].show();
+		particles[i].edges();
 }
 	
 	//r.html(floor(frameRate())); // arrotonda e visualizza il P che contiene il frameRate
