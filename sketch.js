@@ -23,7 +23,11 @@ function setup() {
 	fr = createP(''); //crea il paragrafo per visualizzare il frameRate corrente
 
 	//implemento array di particles
-	particles[0] = new Particle();
+	
+	// aggiungo 100 particles con un for loop
+	for (var i =0; i < 100; i++) {
+		particles[i] = new Particle();
+	}
 }
 
 function draw() {
@@ -66,10 +70,10 @@ function draw() {
 		zoff += 0.0002; // incremento 3d del noise
 
 	}
-
-		particles[0].update();
-		particles[0].show();
-
+	for (var i = 0; i < particles.length; i++) {
+		particles[i].update();
+		particles[i].show();
+}
 	
-	fr.html(floor(frameRate())); // arrotonda e visualizza il P che contiene il frameRate
+	//r.html(floor(frameRate())); // arrotonda e visualizza il P che contiene il frameRate
 }

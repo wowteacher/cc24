@@ -3,7 +3,7 @@
 // viene aggiornata e resettata ai valori iniziali
 
 function Particle () {
-	this.pos = createVector(0,0);
+	this.pos = createVector(random(width), random(height));
 	this.vel = createVector(0,0);
 	this.acc = createVector(0,0);
 	
